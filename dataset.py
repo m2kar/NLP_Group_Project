@@ -12,15 +12,30 @@ def word_cut(text):
     return [word for word in jieba.cut(text) if word.strip()]
 
 
+# def get_dataset(path, text_field, label_field):
+#     text_field.tokenize = word_cut
+#     train, dev = data.TabularDataset.splits(
+#         path=path, format='tsv', skip_header=True,
+#         train='train.tsv', validation='dev.tsv',
+#         fields=[
+#             ('index', None),
+#             ('label', label_field),
+#             ('text', text_field)
+#         ]
+#     )
+
+#     return train, dev
+
 def get_dataset(path, text_field, label_field):
     text_field.tokenize = word_cut
     train, dev = data.TabularDataset.splits(
-        path=path, format='tsv', skip_header=True,
-        train='train.tsv', validation='dev.tsv',
+        path='clf', format='csv', skip_header=True,
+        train='train.csv', validation='dev.csv',
         fields=[
             ('index', None),
             ('label', label_field),
             ('text', text_field)
         ]
     )
+
     return train, dev

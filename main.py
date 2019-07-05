@@ -36,7 +36,7 @@ parser.add_argument('-pretrained-name', type=str, default='sgns.zhihu.word',
 parser.add_argument('-pretrained-path', type=str, default='pretrained', help='path of pre-trained word vectors')
 
 # device
-parser.add_argument('-device', type=int, default=0, help='device to use for iterate data, -1 mean cpu [default: -1]')
+parser.add_argument('-device', type=int, default=0, help='device to use for iterate data, -1 mean cpu [default: 0]')
 
 # option
 parser.add_argument('-snapshot', type=str, default=None, help='filename of model snapshot [default: None]')
@@ -68,6 +68,7 @@ print('Loading data...')
 text_field = data.Field(lower=True)
 label_field = data.Field(sequential=False)
 train_iter, dev_iter = load_dataset(text_field, label_field, args, device=torch.device(0), repeat=False, shuffle=True)
+
 
 args.vocabulary_size = len(text_field.vocab)
 if args.static:
